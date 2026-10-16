@@ -1,67 +1,77 @@
 /* ============================================================
-   CSS Custom Properties — Dark Clay Theme (default)
+   CSS Custom Properties — Dark Claymorphism (default)
    ============================================================ */
 :root {
-  --bg-primary: #1e1b2e;
-  --bg-card: #2d2b45;
-  --text-primary: #e8e4ff;
-  --text-secondary: #9b97c0;
-  --accent: #c084fc;
-  --accent-hover: #a855f7;
-  --border: #3d3a5c;
-  --success: #86efac;
-  --danger: #fca5a5;
-  --timer-accent: #fdba74;
+  /* Dark mode palette */
+  --bg-body-start:  #1a1a2e;
+  --bg-body-mid:    #16213e;
+  --bg-body-end:    #0f3460;
+
+  --bg-card:        rgba(255, 255, 255, 0.08);
+  --card-border:    rgba(255, 255, 255, 0.14);
+  --card-highlight: rgba(255, 255, 255, 0.18);
+
+  --text-primary:   #e2e8f0;
+  --text-secondary: #94a3b8;
+
+  /* Clay accent palette */
+  --accent-coral:   #FF6B6B;
+  --accent-mint:    #4ECDC4;
+  --accent-lavender:#A78BFA;
+  --accent-sky:     #60A5FA;
+  --accent-yellow:  #FCD34D;
+
+  --accent:         #A78BFA;
+  --accent-hover:   #8B5CF6;
+
+  --border:         rgba(255, 255, 255, 0.14);
+  --success:        #4ECDC4;
+  --danger:         #FF6B6B;
+  --timer-accent:   #FCD34D;
 
   --font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  --radius: 24px;
-  --radius-sm: 16px;
-  --radius-xs: 10px;
+
+  /* Border radii */
+  --radius:    28px;
+  --radius-sm: 20px;
+  --radius-xs: 14px;
+
+  /* Clay card shadow (dark) */
   --shadow:
-    0 10px 40px rgba(192, 132, 252, 0.20),
-    0 4px 16px rgba(0, 0, 0, 0.40),
-    inset 0 2px 4px rgba(255, 255, 255, 0.06),
-    inset 0 -2px 4px rgba(192, 132, 252, 0.08);
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 2px 8px rgba(255, 255, 255, 0.18),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.18);
+
   --transition: 0.2s ease;
   --card-padding: 1.75rem;
 }
 
 /* ============================================================
-   Light (Pastel Clay) Theme — toggled via class on <body>
+   Light Claymorphism Theme — body.light / html.light-mode body
    ============================================================ */
-body.light {
-  --bg-primary: #f0e6ff;
-  --bg-card: #ffffff;
-  --text-primary: #4a4a6a;
-  --text-secondary: #8b8ba7;
-  --accent: #a855f7;
-  --accent-hover: #9333ea;
-  --border: #e9d5ff;
-  --success: #86efac;
-  --danger: #fca5a5;
-  --shadow:
-    0 10px 40px rgba(168, 85, 247, 0.15),
-    0 4px 16px rgba(0, 0, 0, 0.08),
-    inset 0 2px 4px rgba(255, 255, 255, 0.9),
-    inset 0 -2px 4px rgba(168, 85, 247, 0.05);
-}
-
-/* Also support class on <html> for early application (prevents flash) */
+body.light,
 html.light-mode body {
-  --bg-primary: #f0e6ff;
-  --bg-card: #ffffff;
-  --text-primary: #4a4a6a;
-  --text-secondary: #8b8ba7;
-  --accent: #a855f7;
-  --accent-hover: #9333ea;
-  --border: #e9d5ff;
-  --success: #86efac;
-  --danger: #fca5a5;
+  --bg-body-start:  #ffecd2;
+  --bg-body-mid:    #fcb69f;
+  --bg-body-end:    #a1c4fd;
+
+  --bg-card:        rgba(255, 255, 255, 0.75);
+  --card-border:    rgba(255, 255, 255, 0.6);
+  --card-highlight: rgba(255, 255, 255, 0.9);
+
+  --text-primary:   #1a1a2e;
+  --text-secondary: #64748b;
+
+  --accent:         #A78BFA;
+  --accent-hover:   #8B5CF6;
+
+  --border:         rgba(167, 139, 250, 0.25);
+
+  /* Clay card shadow (light) */
   --shadow:
-    0 10px 40px rgba(168, 85, 247, 0.15),
-    0 4px 16px rgba(0, 0, 0, 0.08),
-    inset 0 2px 4px rgba(255, 255, 255, 0.9),
-    inset 0 -2px 4px rgba(168, 85, 247, 0.05);
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 2px 8px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.06);
 }
 
 /* ============================================================
@@ -81,27 +91,21 @@ html {
 body {
   font-family: var(--font-family);
   font-weight: 400;
-  background: linear-gradient(135deg, #1e1b2e 0%, #16213e 100%);
+  background: linear-gradient(
+    135deg,
+    var(--bg-body-start) 0%,
+    var(--bg-body-mid)   50%,
+    var(--bg-body-end)   100%
+  );
+  background-attachment: fixed;
   color: var(--text-primary);
   min-height: 100vh;
   transition: background var(--transition), color var(--transition);
   -webkit-font-smoothing: antialiased;
 }
 
-/* Pastel gradient background for light clay mode */
-body.light,
-html.light-mode body {
-  background: linear-gradient(135deg, #f0e6ff 0%, #e8f4fd 100%);
-}
-
-ul {
-  list-style: none;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
+ul  { list-style: none; }
+a   { color: inherit; text-decoration: none; }
 
 button {
   cursor: pointer;
@@ -117,40 +121,34 @@ input {
 /* ============================================================
    Global Custom Scrollbar
    ============================================================ */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: var(--accent-lavender);
   border-radius: 10px;
+  opacity: 0.5;
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent);
-}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 /* ============================================================
-   Header
+   Header — Clay bar
    ============================================================ */
 .app-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: var(--bg-card);
-  border-bottom: 1px solid transparent;
-  border-radius: 0 0 20px 20px;
+  background: var(--bg-card);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
   padding: 0.75rem 1.5rem;
+  border: 2px solid var(--card-border);
+  border-top: none;
   box-shadow:
-    0 4px 20px rgba(192, 132, 252, 0.15),
-    0 2px 8px rgba(0, 0, 0, 0.12);
+    0 8px 28px rgba(0, 0, 0, 0.14),
+    inset 0 2px 8px var(--card-highlight),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.06);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: background-color var(--transition), box-shadow var(--transition);
+  transition: background var(--transition), box-shadow var(--transition);
 }
 
 .header-inner {
@@ -162,32 +160,46 @@ input {
 }
 
 .header-logo {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
 }
 
 .header-title {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-primary);
   flex: 1;
+  letter-spacing: -0.01em;
 }
 
 .theme-toggle {
   font-size: 1.2rem;
   padding: 0.4rem;
-  border-radius: var(--radius-xs);
-  background: transparent;
+  border-radius: 50px;
+  background: var(--bg-card);
   color: var(--text-primary);
-  transition: background-color var(--transition);
+  border: 2px solid var(--card-border);
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.1),
+    inset 0 1px 4px var(--card-highlight),
+    inset 0 -1px 3px rgba(0,0,0,0.08);
+  transition: transform var(--transition), box-shadow var(--transition);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .theme-toggle:hover {
-  background-color: var(--border);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.15),
+    inset 0 1px 4px var(--card-highlight);
+}
+
+.theme-toggle:active {
+  transform: translateY(1px) scale(0.97);
 }
 
 /* ============================================================
@@ -200,29 +212,39 @@ input {
   gap: 1.25rem;
   max-width: 1200px;
   margin: 1.5rem auto;
-  padding: 0 1.25rem 2rem;
+  padding: 0 1.25rem 2.5rem;
 }
 
 /* ============================================================
-   Card Base — Clay morphism
+   Card Base — Claymorphism
    ============================================================ */
 .card {
-  background-color: var(--bg-card);
-  border: none;
+  background: var(--bg-card);
+  border: 2px solid var(--card-border);
   border-radius: var(--radius);
   padding: var(--card-padding);
   box-shadow: var(--shadow);
-  transition: background-color var(--transition), box-shadow var(--transition);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 48px rgba(0, 0, 0, 0.18),
+    inset 0 2px 8px var(--card-highlight),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.1);
+}
+
 .card-title {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.88rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   color: var(--accent);
   display: flex;
   align-items: center;
@@ -236,84 +258,106 @@ input {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 2rem var(--card-padding);
+  padding: 2.25rem var(--card-padding);
 }
 
 .clock-display {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.5rem;
   align-items: center;
 }
 
-/* Clay badge wrapper for the clock */
+/* Clay badge for clock */
 .clock-time {
   font-size: 3rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--accent);
+  letter-spacing: 0.04em;
+  color: #fff;
   line-height: 1;
   font-variant-numeric: tabular-nums;
-  background: var(--bg-primary);
-  padding: 0.5rem 1.5rem;
-  border-radius: 28px;
+  background: linear-gradient(135deg, var(--accent-lavender), var(--accent-sky));
+  padding: 0.6rem 1.75rem;
+  border-radius: 30px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
   box-shadow:
-    0 4px 16px rgba(168, 85, 247, 0.12),
-    inset 0 2px 4px rgba(255, 255, 255, 0.06);
+    0 8px 28px rgba(96, 165, 250, 0.35),
+    inset 0 2px 8px rgba(255, 255, 255, 0.45),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.12);
   display: inline-block;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.2);
 }
 
 body.light .clock-time,
 html.light-mode body .clock-time {
+  color: #1a1a2e;
+  text-shadow: none;
+  background: linear-gradient(135deg, #c4b5fd, #93c5fd);
   box-shadow:
-    0 4px 16px rgba(168, 85, 247, 0.12),
-    inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    0 8px 28px rgba(167, 139, 250, 0.35),
+    inset 0 2px 8px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .clock-date {
   font-size: 0.95rem;
   color: var(--text-secondary);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .greeting-display {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.3rem;
 }
 
 .greeting-text {
   font-size: 1.3rem;
   font-weight: 500;
   color: var(--text-primary);
+  opacity: 0.9;
 }
 
 .greeting-name-wrapper {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
 
 .greeting-name {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--accent);
+  font-size: 1.4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-coral), var(--accent-lavender));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  cursor: pointer;
 }
 
 .btn-edit-name {
   color: var(--text-secondary);
-  padding: 0.2rem;
-  border-radius: var(--radius-xs);
-  transition: color var(--transition), background-color var(--transition);
+  padding: 0.25rem;
+  border-radius: 50px;
+  background: var(--bg-card);
+  border: 2px solid var(--card-border);
+  box-shadow:
+    0 3px 10px rgba(0,0,0,0.1),
+    inset 0 1px 3px var(--card-highlight);
+  transition: color var(--transition), transform var(--transition), box-shadow var(--transition);
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 2rem;
+  height: 2rem;
 }
 
 .btn-edit-name:hover {
   color: var(--accent);
-  background-color: var(--border);
+  transform: translateY(-2px);
+  box-shadow:
+    0 5px 16px rgba(167, 139, 250, 0.25),
+    inset 0 1px 3px var(--card-highlight);
 }
 
 /* ============================================================
@@ -323,39 +367,39 @@ html.light-mode body .clock-time {
   align-items: center;
 }
 
-/* Timer display — clay pill/badge */
+/* Timer display — clay pill */
 .timer-display {
-  background: linear-gradient(135deg, #78350f, #92400e);
-  border-radius: 28px;
-  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  border-radius: 32px;
+  padding: 1rem 2.75rem;
+  border: 2px solid rgba(255, 255, 255, 0.35);
   box-shadow:
-    0 8px 24px rgba(253, 186, 116, 0.25),
-    inset 0 2px 4px rgba(255, 255, 255, 0.08),
-    inset 0 -2px 4px rgba(253, 186, 116, 0.15);
+    0 10px 36px rgba(251, 191, 36, 0.40),
+    inset 0 3px 10px rgba(255, 255, 255, 0.55),
+    inset 0 -3px 8px rgba(180, 120, 0, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Light mode timer display */
 body.light .timer-display,
 html.light-mode body .timer-display {
-  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  background: linear-gradient(135deg, #fde68a, #fcd34d);
   box-shadow:
-    0 8px 24px rgba(253, 186, 116, 0.35),
-    inset 0 2px 4px rgba(255, 255, 255, 0.8),
-    inset 0 -2px 4px rgba(253, 186, 116, 0.2);
+    0 10px 36px rgba(252, 211, 77, 0.45),
+    inset 0 3px 10px rgba(255, 255, 255, 0.85),
+    inset 0 -3px 8px rgba(180, 140, 0, 0.15);
 }
 
 .timer-digits {
   font-size: 3.5rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.06em;
-  color: #fde68a;
+  color: #1a1a2e;
   font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
 }
 
-/* Light mode timer digits — warm brown for contrast on peach */
 body.light .timer-digits,
 html.light-mode body .timer-digits {
   color: #92400e;
@@ -377,47 +421,63 @@ html.light-mode body .timer-digits {
 .duration-label {
   font-size: 0.85rem;
   color: var(--text-secondary);
+  font-weight: 500;
   white-space: nowrap;
 }
 
+/* Recessed/sunken input */
 .duration-input {
-  width: 5rem;
+  width: 5.5rem;
   padding: 0.65rem 1rem;
   font-size: 0.9rem;
-  border-radius: 14px;
-  border: 2px solid var(--border);
-  background: var(--bg-primary);
+  border-radius: var(--radius-xs);
+  border: 2px solid var(--card-border);
+  background: rgba(0, 0, 0, 0.12);
   color: var(--text-primary);
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.06), inset 0 1px 2px rgba(168, 85, 247, 0.04);
+  box-shadow:
+    inset 0 3px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 3px rgba(0, 0, 0, 0.15);
   transition: border-color var(--transition), box-shadow var(--transition);
   text-align: center;
+  font-weight: 600;
+}
+
+body.light .duration-input,
+html.light-mode body .duration-input {
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow:
+    inset 0 3px 8px rgba(0, 0, 0, 0.08),
+    inset 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 .duration-input:focus {
   outline: none;
-  border-color: var(--accent);
+  border-color: var(--accent-yellow);
   box-shadow:
-    inset 0 2px 6px rgba(0, 0, 0, 0.04),
-    0 0 0 3px rgba(168, 85, 247, 0.15);
+    inset 0 3px 8px rgba(0, 0, 0, 0.15),
+    0 0 0 3px rgba(252, 211, 77, 0.25);
 }
 
-/* Timer notification banner — clay style */
+/* Timer notification banner */
 .timer-notification {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  background: linear-gradient(135deg, var(--accent-coral), #ff8e53);
   color: #fff;
-  border-radius: 16px;
-  padding: 0.75rem 1rem;
+  border-radius: 18px;
+  padding: 0.8rem 1.1rem;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   width: 100%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
   box-shadow:
-    0 4px 16px rgba(168, 85, 247, 0.30),
-    inset 0 1px 2px rgba(255, 255, 255, 0.25);
+    0 6px 22px rgba(255, 107, 107, 0.40),
+    inset 0 2px 8px rgba(255, 255, 255, 0.35),
+    inset 0 -2px 6px rgba(180, 60, 60, 0.15);
   animation: slideIn 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
 
 .timer-notification.hidden {
@@ -425,28 +485,31 @@ html.light-mode body .timer-digits {
 }
 
 .btn-close-notif {
-  background: none;
+  background: rgba(255,255,255,0.25);
   border: none;
+  border-radius: 50%;
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 1;
   cursor: pointer;
-  padding: 0 0.25rem;
-  opacity: 0.8;
-  transition: opacity var(--transition);
+  padding: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--transition), transform var(--transition);
 }
 
 .btn-close-notif:hover {
-  opacity: 1;
+  background: rgba(255,255,255,0.4);
+  transform: scale(1.1);
 }
 
 /* ============================================================
    Section 3: To-Do List Card
    ============================================================ */
-.card-todo {
-  /* Fills available height, scrollable list */
-}
-
 .todo-add-row {
   display: flex;
   gap: 0.5rem;
@@ -455,7 +518,7 @@ html.light-mode body .timer-digits {
 .todo-error {
   font-size: 0.82rem;
   color: var(--danger);
-  font-weight: 500;
+  font-weight: 600;
   min-height: 1.2em;
   animation: shake 0.4s ease;
 }
@@ -473,74 +536,70 @@ html.light-mode body .timer-digits {
   padding-right: 0.25rem;
 }
 
-/* Todo item — mini clay chip */
+/* Todo item — mini clay card */
 .todo-item {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.7rem 0.9rem;
+  gap: 0.65rem;
+  padding: 0.75rem 1rem;
   border-radius: 16px;
-  border: none;
-  background: var(--bg-primary);
+  border: 2px solid var(--card-border);
+  background: var(--bg-card);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   box-shadow:
-    0 2px 8px rgba(168, 85, 247, 0.08),
-    inset 0 1px 2px rgba(255, 255, 255, 0.06);
-  transition: box-shadow var(--transition), transform var(--transition), background-color var(--transition);
-  animation: fadeIn 0.2s ease;
-}
-
-body.light .todo-item,
-html.light-mode body .todo-item {
-  box-shadow:
-    0 2px 8px rgba(168, 85, 247, 0.08),
-    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+    0 4px 14px rgba(0, 0, 0, 0.1),
+    inset 0 1px 4px var(--card-highlight),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.06);
+  transition: box-shadow var(--transition), transform var(--transition);
+  animation: fadeIn 0.22s ease;
 }
 
 .todo-item:hover {
+  transform: translateY(-2px);
   box-shadow:
-    0 4px 16px rgba(168, 85, 247, 0.15),
-    inset 0 1px 2px rgba(255, 255, 255, 0.06);
-  transform: translateY(-1px);
-}
-
-body.light .todo-item:hover,
-html.light-mode body .todo-item:hover {
-  box-shadow:
-    0 4px 16px rgba(168, 85, 247, 0.15),
-    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+    0 8px 24px rgba(0, 0, 0, 0.14),
+    inset 0 1px 4px var(--card-highlight),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .todo-item.done {
-  background: rgba(134, 239, 172, 0.15);
-  opacity: 0.85;
+  opacity: 0.75;
+  background: rgba(78, 205, 196, 0.1);
+  border-color: rgba(78, 205, 196, 0.25);
 }
 
-/* Checkbox — clay circle */
+/* Custom round checkbox — clay style */
 .todo-checkbox {
   appearance: none;
   -webkit-appearance: none;
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1.25rem;
+  height: 1.25rem;
   border-radius: 50%;
-  border: 2.5px solid var(--border);
+  border: 2.5px solid var(--text-secondary);
   cursor: pointer;
   flex-shrink: 0;
   position: relative;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
+  background: transparent;
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.15),
+    0 1px 2px rgba(255, 255, 255, 0.1);
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
 .todo-checkbox:checked {
-  background: linear-gradient(135deg, #86efac, #4ade80);
-  border-color: #4ade80;
-  box-shadow: 0 2px 8px rgba(74, 222, 128, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  background: linear-gradient(135deg, var(--accent-mint), #2dd4bf);
+  border-color: var(--accent-mint);
+  box-shadow:
+    0 3px 10px rgba(78, 205, 196, 0.45),
+    inset 0 1px 3px rgba(255, 255, 255, 0.5);
 }
 
 .todo-checkbox:checked::after {
   content: '';
   position: absolute;
-  left: 2px;
-  top: -1px;
+  left: 3px;
+  top: 0px;
   width: 5px;
   height: 9px;
   border: 2px solid #fff;
@@ -565,28 +624,32 @@ html.light-mode body .todo-item:hover {
 
 .todo-actions {
   display: flex;
-  gap: 0.25rem;
+  gap: 0.3rem;
   flex-shrink: 0;
 }
 
 .btn-todo-action {
   padding: 0.3rem;
-  border-radius: var(--radius-xs);
+  border-radius: 50%;
   color: var(--text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color var(--transition), background-color var(--transition);
+  transition: color var(--transition), background var(--transition), transform var(--transition);
+  width: 1.8rem;
+  height: 1.8rem;
 }
 
 .btn-todo-action:hover.edit {
-  color: var(--accent);
-  background-color: rgba(168, 85, 247, 0.12);
+  color: var(--accent-lavender);
+  background: rgba(167, 139, 250, 0.18);
+  transform: scale(1.15);
 }
 
 .btn-todo-action:hover.delete {
   color: var(--danger);
-  background-color: rgba(252, 165, 165, 0.15);
+  background: rgba(255, 107, 107, 0.18);
+  transform: scale(1.15);
 }
 
 /* ============================================================
@@ -598,24 +661,30 @@ html.light-mode body .todo-item:hover {
   gap: 0.75rem;
 }
 
-/* Link card — square clay tile */
+/* Link card — clay tile with colorful gradient */
 .link-card {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
-  padding: 1rem;
+  gap: 0.45rem;
+  padding: 1rem 0.75rem;
   min-width: 5rem;
-  border-radius: 20px;
-  border: none;
-  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  background: linear-gradient(
+    135deg,
+    rgba(96, 165, 250, 0.22) 0%,
+    rgba(167, 139, 250, 0.22) 100%
+  );
   cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   box-shadow:
-    0 4px 16px rgba(168, 85, 247, 0.10),
-    inset 0 2px 4px rgba(255, 255, 255, 0.06),
-    inset 0 -1px 3px rgba(168, 85, 247, 0.05);
+    0 6px 20px rgba(0, 0, 0, 0.14),
+    inset 0 2px 6px rgba(255, 255, 255, 0.25),
+    inset 0 -1px 4px rgba(0, 0, 0, 0.1);
   transition: transform var(--transition), box-shadow var(--transition);
   text-decoration: none;
   color: var(--text-primary);
@@ -623,51 +692,60 @@ html.light-mode body .todo-item:hover {
 
 body.light .link-card,
 html.light-mode body .link-card {
+  background: linear-gradient(
+    135deg,
+    rgba(196, 181, 253, 0.55) 0%,
+    rgba(147, 197, 253, 0.55) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.65);
   box-shadow:
-    0 4px 16px rgba(168, 85, 247, 0.10),
-    inset 0 2px 4px rgba(255, 255, 255, 0.8),
-    inset 0 -1px 3px rgba(168, 85, 247, 0.05);
+    0 6px 20px rgba(0, 0, 0, 0.10),
+    inset 0 2px 6px rgba(255, 255, 255, 0.85),
+    inset 0 -1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .link-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px) scale(1.04);
   box-shadow:
-    0 8px 28px rgba(168, 85, 247, 0.20),
-    inset 0 2px 4px rgba(255, 255, 255, 0.06);
+    0 12px 36px rgba(0, 0, 0, 0.2),
+    inset 0 2px 6px rgba(255, 255, 255, 0.3),
+    inset 0 -1px 4px rgba(0, 0, 0, 0.1);
 }
 
 body.light .link-card:hover,
 html.light-mode body .link-card:hover {
   box-shadow:
-    0 8px 28px rgba(168, 85, 247, 0.20),
-    inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    0 12px 36px rgba(167, 139, 250, 0.25),
+    inset 0 2px 6px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 4px rgba(0, 0, 0, 0.04);
 }
 
 .link-favicon {
-  width: 24px;
-  height: 24px;
-  border-radius: 4px;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
   object-fit: contain;
 }
 
 .link-favicon-fallback {
-  width: 24px;
-  height: 24px;
-  border-radius: 4px;
-  background-color: var(--accent);
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-coral), var(--accent-lavender));
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: 0.78rem;
+  font-weight: 800;
   flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .link-name {
   font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-weight: 600;
+  color: var(--text-primary);
   text-align: center;
   max-width: 6rem;
   overflow: hidden;
@@ -677,14 +755,14 @@ html.light-mode body .link-card:hover {
 
 .link-delete-btn {
   position: absolute;
-  top: -0.4rem;
-  right: -0.4rem;
-  width: 1.3rem;
-  height: 1.3rem;
+  top: -0.45rem;
+  right: -0.45rem;
+  width: 1.4rem;
+  height: 1.4rem;
   border-radius: 50%;
-  background-color: var(--danger);
+  background: linear-gradient(135deg, var(--accent-coral), #ff4757);
   color: #fff;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   line-height: 1;
   display: flex;
   align-items: center;
@@ -692,8 +770,9 @@ html.light-mode body .link-card:hover {
   opacity: 0;
   transition: opacity var(--transition), transform var(--transition);
   cursor: pointer;
-  border: none;
+  border: 2px solid rgba(255,255,255,0.5);
   padding: 0;
+  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
 }
 
 .link-card:hover .link-delete-btn {
@@ -701,7 +780,7 @@ html.light-mode body .link-card:hover {
 }
 
 .link-delete-btn:hover {
-  transform: scale(1.15);
+  transform: scale(1.2);
 }
 
 .add-link-btn {
@@ -710,124 +789,158 @@ html.light-mode body .link-card:hover {
 }
 
 /* ============================================================
-   Buttons — Clay style
+   Buttons — Clay pill style
    ============================================================ */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
-  padding: 0.65rem 1.3rem;
+  padding: 0.65rem 1.4rem;
   font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: 14px;
-  border: 1px solid transparent;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.5);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  font-weight: 700;
+  border-radius: 50px;           /* pill shape */
+  border: 2px solid transparent;
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.15),
+    inset 0 2px 6px rgba(255, 255, 255, 0.35),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
   white-space: nowrap;
   line-height: 1;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  transform: translateY(-3px);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.22),
+    inset 0 2px 6px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .btn:active {
   transform: translateY(1px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.10), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.12),
+    inset 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
+/* Primary — lavender/purple clay */
 .btn-primary {
-  background: linear-gradient(135deg, #c084fc, #a855f7);
-  color: #fff;
-  border-color: transparent;
+  background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+  color: #1a1a2e;
+  border-color: rgba(255, 255, 255, 0.35);
+  text-shadow: 0 1px 0 rgba(255,255,255,0.3);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #a855f7, #9333ea);
-  border-color: transparent;
+  background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+  color: #fff;
 }
 
+/* Secondary — subtle glass */
 .btn-secondary {
-  background-color: transparent;
+  background: var(--bg-card);
   color: var(--text-secondary);
-  border-color: var(--border);
+  border-color: var(--card-border);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .btn-secondary:hover {
-  background-color: var(--border);
+  background: rgba(255,255,255,0.18);
   color: var(--text-primary);
+  border-color: rgba(255,255,255,0.3);
 }
 
+/* Accent — coral/mint clay */
 .btn-accent {
-  background-color: transparent;
-  color: var(--accent);
-  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(255,107,107,0.15), rgba(78,205,196,0.15));
+  color: var(--accent-coral);
+  border-color: rgba(255, 107, 107, 0.35);
 }
 
 .btn-accent:hover {
-  background: linear-gradient(135deg, #c084fc, #a855f7);
+  background: linear-gradient(135deg, #FF6B6B, #ff8e53);
   color: #fff;
   border-color: transparent;
+  box-shadow:
+    0 10px 28px rgba(255, 107, 107, 0.35),
+    inset 0 2px 6px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 4px rgba(180, 60, 60, 0.15);
 }
 
 .btn-sm {
-  padding: 0.4rem 0.85rem;
+  padding: 0.4rem 0.9rem;
   font-size: 0.82rem;
-  border-radius: 14px;
 }
 
 .btn-icon {
   padding: 0.4rem;
-  border-radius: var(--radius-xs);
+  border-radius: 50px;
   width: auto;
   height: auto;
 }
 
 /* ============================================================
-   Text Input — Clay style
+   Text Input — Clay recessed/sunken style
    ============================================================ */
 .text-input {
   flex: 1;
-  padding: 0.65rem 1rem;
+  padding: 0.7rem 1.1rem;
   font-size: 0.92rem;
-  border-radius: 14px;
-  border: 2px solid var(--border);
-  background: var(--bg-primary);
+  border-radius: var(--radius-xs);
+  border: 2px solid var(--card-border);
+  background: rgba(0, 0, 0, 0.14);
   color: var(--text-primary);
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.06), inset 0 1px 2px rgba(168, 85, 247, 0.04);
+  box-shadow:
+    inset 0 3px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: border-color var(--transition), box-shadow var(--transition);
   width: 100%;
+  font-weight: 500;
+}
+
+body.light .text-input,
+html.light-mode body .text-input {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow:
+    inset 0 3px 8px rgba(0, 0, 0, 0.07),
+    inset 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .text-input::placeholder {
   color: var(--text-secondary);
+  font-weight: 400;
 }
 
 .text-input:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow:
-    inset 0 2px 6px rgba(0, 0, 0, 0.04),
-    0 0 0 3px rgba(168, 85, 247, 0.15);
+    inset 0 3px 8px rgba(0, 0, 0, 0.12),
+    0 0 0 3px rgba(167, 139, 250, 0.2);
 }
 
 /* ============================================================
-   Modals — Clay style
+   Modals — Clay panel
    ============================================================ */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(30, 27, 46, 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(10, 8, 30, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 500;
   padding: 1rem;
-  animation: fadeIn 0.15s ease;
+  animation: fadeIn 0.18s ease;
 }
 
 .modal-overlay.hidden {
@@ -835,34 +948,42 @@ html.light-mode body .link-card:hover {
 }
 
 .modal {
-  background-color: var(--bg-card);
-  border: none;
-  border-radius: 28px;
-  padding: 2rem;
+  background: var(--bg-card);
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 2.25rem;
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  box-shadow: var(--shadow);
-  animation: slideUp 0.2s ease;
+  gap: 0.85rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.35),
+    inset 0 2px 10px var(--card-highlight),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.12);
+  animation: slideUp 0.22s ease;
 }
 
 .modal-title {
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 800;
   color: var(--text-primary);
+  letter-spacing: -0.01em;
 }
 
 .modal-label {
   font-size: 0.85rem;
   color: var(--text-secondary);
-  font-weight: 500;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .modal-actions {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.6rem;
   margin-top: 0.5rem;
   justify-content: flex-end;
 }
@@ -876,12 +997,12 @@ html.light-mode body .link-card:hover {
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
 }
 
 @keyframes slideIn {
-  from { opacity: 0; transform: translateY(-8px); }
+  from { opacity: 0; transform: translateY(-10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -895,7 +1016,7 @@ html.light-mode body .link-card:hover {
 }
 
 /* ============================================================
-   Responsive — Tablet
+   Responsive — Tablet (≤ 900px)
    ============================================================ */
 @media (max-width: 900px) {
   .dashboard {
@@ -913,7 +1034,7 @@ html.light-mode body .link-card:hover {
 }
 
 /* ============================================================
-   Responsive — Mobile
+   Responsive — Mobile (≤ 600px)
    ============================================================ */
 @media (max-width: 600px) {
   .dashboard {
@@ -924,11 +1045,12 @@ html.light-mode body .link-card:hover {
   }
 
   .card {
-    padding: 1.25rem;
+    padding: 1.35rem;
   }
 
   .clock-time {
     font-size: 2.2rem;
+    padding: 0.5rem 1.25rem;
   }
 
   .timer-digits {
@@ -953,6 +1075,10 @@ html.light-mode body .link-card:hover {
   }
 
   .timer-display {
-    padding: 0.75rem 1.5rem;
+    padding: 0.8rem 1.75rem;
+  }
+
+  .modal {
+    padding: 1.75rem 1.5rem;
   }
 }
