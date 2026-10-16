@@ -1,52 +1,67 @@
 /* ============================================================
-   CSS Custom Properties — Dark Theme (default)
+   CSS Custom Properties — Dark Clay Theme (default)
    ============================================================ */
 :root {
-  --bg-primary: #0f1117;
-  --bg-card: #1a1d27;
-  --text-primary: #e2e8f0;
-  --text-secondary: #94a3b8;
-  --accent: #6366f1;
-  --accent-hover: #4f46e5;
-  --border: #2d3748;
-  --success: #10b981;
-  --danger: #ef4444;
+  --bg-primary: #1e1b2e;
+  --bg-card: #2d2b45;
+  --text-primary: #e8e4ff;
+  --text-secondary: #9b97c0;
+  --accent: #c084fc;
+  --accent-hover: #a855f7;
+  --border: #3d3a5c;
+  --success: #86efac;
+  --danger: #fca5a5;
+  --timer-accent: #fdba74;
 
   --font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  --radius: 12px;
-  --radius-sm: 8px;
-  --radius-xs: 4px;
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+  --radius: 24px;
+  --radius-sm: 16px;
+  --radius-xs: 10px;
+  --shadow:
+    0 10px 40px rgba(192, 132, 252, 0.20),
+    0 4px 16px rgba(0, 0, 0, 0.40),
+    inset 0 2px 4px rgba(255, 255, 255, 0.06),
+    inset 0 -2px 4px rgba(192, 132, 252, 0.08);
   --transition: 0.2s ease;
-  --card-padding: 1.5rem;
+  --card-padding: 1.75rem;
 }
 
-/* Light theme override — toggled via class on <body> */
+/* ============================================================
+   Light (Pastel Clay) Theme — toggled via class on <body>
+   ============================================================ */
 body.light {
-  --bg-primary: #f1f5f9;
+  --bg-primary: #f0e6ff;
   --bg-card: #ffffff;
-  --text-primary: #1e293b;
-  --text-secondary: #64748b;
-  --accent: #6366f1;
-  --accent-hover: #4f46e5;
-  --border: #e2e8f0;
-  --success: #10b981;
-  --danger: #ef4444;
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+  --text-primary: #4a4a6a;
+  --text-secondary: #8b8ba7;
+  --accent: #a855f7;
+  --accent-hover: #9333ea;
+  --border: #e9d5ff;
+  --success: #86efac;
+  --danger: #fca5a5;
+  --shadow:
+    0 10px 40px rgba(168, 85, 247, 0.15),
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9),
+    inset 0 -2px 4px rgba(168, 85, 247, 0.05);
 }
 
-/* Also support class on <html> for early application */
+/* Also support class on <html> for early application (prevents flash) */
 html.light-mode body {
-  --bg-primary: #f1f5f9;
+  --bg-primary: #f0e6ff;
   --bg-card: #ffffff;
-  --text-primary: #1e293b;
-  --text-secondary: #64748b;
-  --accent: #6366f1;
-  --accent-hover: #4f46e5;
-  --border: #e2e8f0;
-  --success: #10b981;
-  --danger: #ef4444;
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+  --text-primary: #4a4a6a;
+  --text-secondary: #8b8ba7;
+  --accent: #a855f7;
+  --accent-hover: #9333ea;
+  --border: #e9d5ff;
+  --success: #86efac;
+  --danger: #fca5a5;
+  --shadow:
+    0 10px 40px rgba(168, 85, 247, 0.15),
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9),
+    inset 0 -2px 4px rgba(168, 85, 247, 0.05);
 }
 
 /* ============================================================
@@ -65,11 +80,18 @@ html {
 
 body {
   font-family: var(--font-family);
-  background-color: var(--bg-primary);
+  font-weight: 400;
+  background: linear-gradient(135deg, #1e1b2e 0%, #16213e 100%);
   color: var(--text-primary);
   min-height: 100vh;
-  transition: background-color var(--transition), color var(--transition);
+  transition: background var(--transition), color var(--transition);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Pastel gradient background for light clay mode */
+body.light,
+html.light-mode body {
+  background: linear-gradient(135deg, #f0e6ff 0%, #e8f4fd 100%);
 }
 
 ul {
@@ -93,6 +115,26 @@ input {
 }
 
 /* ============================================================
+   Global Custom Scrollbar
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ============================================================
    Header
    ============================================================ */
 .app-header {
@@ -100,9 +142,15 @@ input {
   top: 0;
   z-index: 100;
   background-color: var(--bg-card);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid transparent;
+  border-radius: 0 0 20px 20px;
   padding: 0.75rem 1.5rem;
-  transition: background-color var(--transition), border-color var(--transition);
+  box-shadow:
+    0 4px 20px rgba(192, 132, 252, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background-color var(--transition), box-shadow var(--transition);
 }
 
 .header-inner {
@@ -127,7 +175,7 @@ input {
 .theme-toggle {
   font-size: 1.2rem;
   padding: 0.4rem;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
   background: transparent;
   color: var(--text-primary);
   transition: background-color var(--transition);
@@ -156,15 +204,15 @@ input {
 }
 
 /* ============================================================
-   Card Base
+   Card Base — Clay morphism
    ============================================================ */
 .card {
   background-color: var(--bg-card);
-  border: 1px solid var(--border);
+  border: none;
   border-radius: var(--radius);
   padding: var(--card-padding);
   box-shadow: var(--shadow);
-  transition: background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
+  transition: background-color var(--transition), box-shadow var(--transition);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -175,7 +223,7 @@ input {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--text-secondary);
+  color: var(--accent);
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -194,9 +242,11 @@ input {
 .clock-display {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.4rem;
+  align-items: center;
 }
 
+/* Clay badge wrapper for the clock */
 .clock-time {
   font-size: 3rem;
   font-weight: 700;
@@ -204,6 +254,20 @@ input {
   color: var(--accent);
   line-height: 1;
   font-variant-numeric: tabular-nums;
+  background: var(--bg-primary);
+  padding: 0.5rem 1.5rem;
+  border-radius: 28px;
+  box-shadow:
+    0 4px 16px rgba(168, 85, 247, 0.12),
+    inset 0 2px 4px rgba(255, 255, 255, 0.06);
+  display: inline-block;
+}
+
+body.light .clock-time,
+html.light-mode body .clock-time {
+  box-shadow:
+    0 4px 16px rgba(168, 85, 247, 0.12),
+    inset 0 2px 4px rgba(255, 255, 255, 0.8);
 }
 
 .clock-date {
@@ -259,16 +323,42 @@ input {
   align-items: center;
 }
 
+/* Timer display — clay pill/badge */
 .timer-display {
-  padding: 1rem 0;
+  background: linear-gradient(135deg, #78350f, #92400e);
+  border-radius: 28px;
+  padding: 1rem 2.5rem;
+  box-shadow:
+    0 8px 24px rgba(253, 186, 116, 0.25),
+    inset 0 2px 4px rgba(255, 255, 255, 0.08),
+    inset 0 -2px 4px rgba(253, 186, 116, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Light mode timer display */
+body.light .timer-display,
+html.light-mode body .timer-display {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  box-shadow:
+    0 8px 24px rgba(253, 186, 116, 0.35),
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 4px rgba(253, 186, 116, 0.2);
 }
 
 .timer-digits {
   font-size: 3.5rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: var(--text-primary);
+  color: #fde68a;
   font-variant-numeric: tabular-nums;
+}
+
+/* Light mode timer digits — warm brown for contrast on peach */
+body.light .timer-digits,
+html.light-mode body .timer-digits {
+  color: #92400e;
 }
 
 .timer-controls {
@@ -292,34 +382,41 @@ input {
 
 .duration-input {
   width: 5rem;
-  padding: 0.35rem 0.6rem;
+  padding: 0.65rem 1rem;
   font-size: 0.9rem;
-  border-radius: var(--radius-xs);
-  border: 1px solid var(--border);
-  background-color: var(--bg-primary);
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  background: var(--bg-primary);
   color: var(--text-primary);
-  transition: border-color var(--transition), background-color var(--transition);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.06), inset 0 1px 2px rgba(168, 85, 247, 0.04);
+  transition: border-color var(--transition), box-shadow var(--transition);
   text-align: center;
 }
 
 .duration-input:focus {
   outline: none;
   border-color: var(--accent);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.04),
+    0 0 0 3px rgba(168, 85, 247, 0.15);
 }
 
-/* Timer notification banner */
+/* Timer notification banner — clay style */
 .timer-notification {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  background-color: var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
   color: #fff;
-  border-radius: var(--radius-sm);
-  padding: 0.65rem 1rem;
+  border-radius: 16px;
+  padding: 0.75rem 1rem;
   font-size: 0.9rem;
   font-weight: 500;
   width: 100%;
+  box-shadow:
+    0 4px 16px rgba(168, 85, 247, 0.30),
+    inset 0 1px 2px rgba(255, 255, 255, 0.25);
   animation: slideIn 0.3s ease;
 }
 
@@ -370,62 +467,73 @@ input {
 .todo-list {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.5rem;
   max-height: 300px;
   overflow-y: auto;
   padding-right: 0.25rem;
 }
 
-/* Custom scrollbar */
-.todo-list::-webkit-scrollbar {
-  width: 5px;
-}
-
-.todo-list::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.todo-list::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 10px;
-}
-
+/* Todo item — mini clay chip */
 .todo-item {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.6rem 0.75rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  background-color: var(--bg-primary);
-  transition: background-color var(--transition), border-color var(--transition), opacity var(--transition);
+  padding: 0.7rem 0.9rem;
+  border-radius: 16px;
+  border: none;
+  background: var(--bg-primary);
+  box-shadow:
+    0 2px 8px rgba(168, 85, 247, 0.08),
+    inset 0 1px 2px rgba(255, 255, 255, 0.06);
+  transition: box-shadow var(--transition), transform var(--transition), background-color var(--transition);
   animation: fadeIn 0.2s ease;
 }
 
+body.light .todo-item,
+html.light-mode body .todo-item {
+  box-shadow:
+    0 2px 8px rgba(168, 85, 247, 0.08),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
 .todo-item:hover {
-  border-color: var(--accent);
+  box-shadow:
+    0 4px 16px rgba(168, 85, 247, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
+}
+
+body.light .todo-item:hover,
+html.light-mode body .todo-item:hover {
+  box-shadow:
+    0 4px 16px rgba(168, 85, 247, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .todo-item.done {
-  opacity: 0.5;
+  background: rgba(134, 239, 172, 0.15);
+  opacity: 0.85;
 }
 
+/* Checkbox — clay circle */
 .todo-checkbox {
   appearance: none;
   -webkit-appearance: none;
-  width: 1.1rem;
-  height: 1.1rem;
-  border: 2px solid var(--border);
+  width: 1.2rem;
+  height: 1.2rem;
   border-radius: 50%;
+  border: 2.5px solid var(--border);
   cursor: pointer;
   flex-shrink: 0;
   position: relative;
-  transition: background-color var(--transition), border-color var(--transition);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
 .todo-checkbox:checked {
-  background-color: var(--success);
-  border-color: var(--success);
+  background: linear-gradient(135deg, #86efac, #4ade80);
+  border-color: #4ade80;
+  box-shadow: 0 2px 8px rgba(74, 222, 128, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .todo-checkbox:checked::after {
@@ -473,12 +581,12 @@ input {
 
 .btn-todo-action:hover.edit {
   color: var(--accent);
-  background-color: rgba(99, 102, 241, 0.12);
+  background-color: rgba(168, 85, 247, 0.12);
 }
 
 .btn-todo-action:hover.delete {
   color: var(--danger);
-  background-color: rgba(239, 68, 68, 0.12);
+  background-color: rgba(252, 165, 165, 0.15);
 }
 
 /* ============================================================
@@ -490,6 +598,7 @@ input {
   gap: 0.75rem;
 }
 
+/* Link card — square clay tile */
 .link-card {
   position: relative;
   display: flex;
@@ -497,20 +606,41 @@ input {
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  padding: 0.85rem 1rem;
+  padding: 1rem;
   min-width: 5rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  background-color: var(--bg-primary);
+  border-radius: 20px;
+  border: none;
+  background: var(--bg-card);
   cursor: pointer;
-  transition: border-color var(--transition), background-color var(--transition), transform var(--transition);
+  box-shadow:
+    0 4px 16px rgba(168, 85, 247, 0.10),
+    inset 0 2px 4px rgba(255, 255, 255, 0.06),
+    inset 0 -1px 3px rgba(168, 85, 247, 0.05);
+  transition: transform var(--transition), box-shadow var(--transition);
   text-decoration: none;
   color: var(--text-primary);
 }
 
+body.light .link-card,
+html.light-mode body .link-card {
+  box-shadow:
+    0 4px 16px rgba(168, 85, 247, 0.10),
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 -1px 3px rgba(168, 85, 247, 0.05);
+}
+
 .link-card:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+  box-shadow:
+    0 8px 28px rgba(168, 85, 247, 0.20),
+    inset 0 2px 4px rgba(255, 255, 255, 0.06);
+}
+
+body.light .link-card:hover,
+html.light-mode body .link-card:hover {
+  box-shadow:
+    0 8px 28px rgba(168, 85, 247, 0.20),
+    inset 0 2px 4px rgba(255, 255, 255, 0.8);
 }
 
 .link-favicon {
@@ -580,36 +710,43 @@ input {
 }
 
 /* ============================================================
-   Buttons
+   Buttons — Clay style
    ============================================================ */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
-  padding: 0.55rem 1.1rem;
+  padding: 0.65rem 1.3rem;
   font-size: 0.9rem;
-  font-weight: 500;
-  border-radius: var(--radius-sm);
+  font-weight: 600;
+  border-radius: 14px;
   border: 1px solid transparent;
-  transition: background-color var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
   white-space: nowrap;
   line-height: 1;
 }
 
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
 .btn:active {
-  transform: scale(0.97);
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.10), inset 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 .btn-primary {
-  background-color: var(--accent);
+  background: linear-gradient(135deg, #c084fc, #a855f7);
   color: #fff;
-  border-color: var(--accent);
+  border-color: transparent;
 }
 
 .btn-primary:hover {
-  background-color: var(--accent-hover);
-  border-color: var(--accent-hover);
+  background: linear-gradient(135deg, #a855f7, #9333ea);
+  border-color: transparent;
 }
 
 .btn-secondary {
@@ -630,13 +767,15 @@ input {
 }
 
 .btn-accent:hover {
-  background-color: var(--accent);
+  background: linear-gradient(135deg, #c084fc, #a855f7);
   color: #fff;
+  border-color: transparent;
 }
 
 .btn-sm {
-  padding: 0.35rem 0.75rem;
+  padding: 0.4rem 0.85rem;
   font-size: 0.82rem;
+  border-radius: 14px;
 }
 
 .btn-icon {
@@ -647,17 +786,18 @@ input {
 }
 
 /* ============================================================
-   Text Input
+   Text Input — Clay style
    ============================================================ */
 .text-input {
   flex: 1;
-  padding: 0.55rem 0.85rem;
+  padding: 0.65rem 1rem;
   font-size: 0.92rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  background-color: var(--bg-primary);
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  background: var(--bg-primary);
   color: var(--text-primary);
-  transition: border-color var(--transition), background-color var(--transition);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.06), inset 0 1px 2px rgba(168, 85, 247, 0.04);
+  transition: border-color var(--transition), box-shadow var(--transition);
   width: 100%;
 }
 
@@ -668,15 +808,20 @@ input {
 .text-input:focus {
   outline: none;
   border-color: var(--accent);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.04),
+    0 0 0 3px rgba(168, 85, 247, 0.15);
 }
 
 /* ============================================================
-   Modals
+   Modals — Clay style
    ============================================================ */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.55);
+  background: rgba(30, 27, 46, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -691,9 +836,9 @@ input {
 
 .modal {
   background-color: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.75rem;
+  border: none;
+  border-radius: 28px;
+  padding: 2rem;
   width: 100%;
   max-width: 400px;
   display: flex;
@@ -805,5 +950,9 @@ input {
 
   .todo-list {
     max-height: 240px;
+  }
+
+  .timer-display {
+    padding: 0.75rem 1.5rem;
   }
 }
