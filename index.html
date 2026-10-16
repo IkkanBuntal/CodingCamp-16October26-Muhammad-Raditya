@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Apply saved theme immediately to prevent flash -->
+  <script>
+    (function () {
+      var theme = localStorage.getItem('dashboard_theme');
+      if (theme === 'light') document.documentElement.classList.add('light-mode');
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- Header / Navbar -->
+  <header class="app-header" role="banner">
+    <div class="header-inner">
+      <span class="header-logo" aria-hidden="true">⚡</span>
+      <span class="header-title">Life Dashboard</span>
+      <button
+        id="theme-toggle"
+        class="btn btn-icon theme-toggle"
+        aria-label="Toggle light/dark mode"
+        title="Toggle theme"
+      >
+        <span class="theme-icon" id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Dashboard Grid -->
+  <main class="dashboard" role="main">
+
+    <!-- Section 1: Greeting -->
+    <section class="card card-greeting" aria-label="Greeting and Clock">
+      <div class="clock-display" aria-live="polite" aria-atomic="true">
+        <span id="clock-time" class="clock-time">00:00:00</span>
+        <span id="clock-date" class="clock-date">Loading...</span>
+      </div>
+      <div class="greeting-display">
+        <p id="greeting-text" class="greeting-text">Good Morning,</p>
+        <div class="greeting-name-wrapper">
+          <span id="greeting-name" class="greeting-name">User</span>
+          <button
+            id="edit-name-btn"
+            class="btn btn-icon btn-edit-name"
+            aria-label="Edit your name"
+            title="Edit name"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Focus Timer (Pomodoro) -->
+    <section class="card card-timer" aria-label="Focus Timer">
+      <h2 class="card-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Focus Timer
+      </h2>
+      <div class="timer-display" aria-live="polite" aria-atomic="true">
+        <span id="timer-display" class="timer-digits">25:00</span>
+      </div>
+      <div class="timer-controls">
+        <button id="timer-start-pause" class="btn btn-primary" aria-label="Start timer">Start</button>
+        <button id="timer-reset" class="btn btn-secondary" aria-label="Reset timer">Reset</button>
+      </div>
+      <div class="timer-duration-row">
+        <label for="timer-duration-input" class="duration-label">Minutes:</label>
+        <input
+          type="number"
+          id="timer-duration-input"
+          class="duration-input"
+          min="1"
+          max="120"
+          value="25"
+          aria-label="Set timer duration in minutes"
+        />
+        <button id="timer-set-btn" class="btn btn-sm btn-accent" aria-label="Set custom duration">Set</button>
+      </div>
+      <!-- Notification banner (hidden by default) -->
+      <div id="timer-notification" class="timer-notification hidden" role="alert" aria-live="assertive">
+        <span id="timer-notification-text">⏰ Focus session complete! Take a break.</span>
+        <button class="btn-close-notif" aria-label="Dismiss notification" id="timer-notif-close">×</button>
+      </div>
+    </section>
+
+    <!-- Section 3: To-Do List -->
+    <section class="card card-todo" aria-label="To-Do List">
+      <h2 class="card-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        To-Do List
+      </h2>
+      <div class="todo-add-row">
+        <input
+          type="text"
+          id="todo-input"
+          class="text-input"
+          placeholder="Add a new task..."
+          aria-label="New task text"
+          maxlength="200"
+        />
+        <button id="todo-add-btn" class="btn btn-primary" aria-label="Add task">Add</button>
+      </div>
+      <p id="todo-error" class="todo-error hidden" role="alert" aria-live="polite">Task already exists!</p>
+      <ul id="todo-list" class="todo-list" aria-label="Task list" role="list">
+        <!-- Tasks rendered by JS -->
+      </ul>
+    </section>
+
+    <!-- Section 4: Quick Links -->
+    <section class="card card-links" aria-label="Quick Links">
+      <h2 class="card-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        Quick Links
+      </h2>
+      <div id="links-grid" class="links-grid" role="list" aria-label="Saved links">
+        <!-- Link cards rendered by JS -->
+      </div>
+      <button id="add-link-btn" class="btn btn-accent add-link-btn" aria-label="Add a new quick link">
+        <span aria-hidden="true">＋</span> Add Link
+      </button>
+    </section>
+
+  </main>
+
+  <!-- Modal: Edit Name -->
+  <div id="modal-name" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-name-title">
+    <div class="modal">
+      <h3 class="modal-title" id="modal-name-title">Edit Your Name</h3>
+      <label for="modal-name-input" class="modal-label">Your name</label>
+      <input type="text" id="modal-name-input" class="text-input" placeholder="Enter your name" maxlength="40" />
+      <div class="modal-actions">
+        <button id="modal-name-save" class="btn btn-primary">Save</button>
+        <button id="modal-name-cancel" class="btn btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add Quick Link -->
+  <div id="modal-link" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-link-title">
+    <div class="modal">
+      <h3 class="modal-title" id="modal-link-title">Add Quick Link</h3>
+      <label for="modal-link-name" class="modal-label">Name</label>
+      <input type="text" id="modal-link-name" class="text-input" placeholder="e.g. GitHub" maxlength="30" />
+      <label for="modal-link-url" class="modal-label" style="margin-top:0.75rem;">URL</label>
+      <input type="url" id="modal-link-url" class="text-input" placeholder="https://example.com" />
+      <p id="modal-link-error" class="todo-error hidden" role="alert">Please fill in both fields with a valid URL.</p>
+      <div class="modal-actions">
+        <button id="modal-link-save" class="btn btn-primary">Add</button>
+        <button id="modal-link-cancel" class="btn btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Edit Todo -->
+  <div id="modal-todo-edit" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-todo-title">
+    <div class="modal">
+      <h3 class="modal-title" id="modal-todo-title">Edit Task</h3>
+      <label for="modal-todo-input" class="modal-label">Task text</label>
+      <input type="text" id="modal-todo-input" class="text-input" placeholder="Task text" maxlength="200" />
+      <p id="modal-todo-error" class="todo-error hidden" role="alert">Task already exists!</p>
+      <div class="modal-actions">
+        <button id="modal-todo-save" class="btn btn-primary">Save</button>
+        <button id="modal-todo-cancel" class="btn btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
